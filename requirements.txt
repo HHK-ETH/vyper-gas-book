@@ -1,0 +1,5 @@
+vyper==0.3.10
+eth_ape==0.6.24
+ape-foundry==0.6.18
+ape-vyper==0.6.13
+pytest==7.4.3
