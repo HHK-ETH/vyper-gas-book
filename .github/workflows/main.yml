@@ -1,0 +1,17 @@
+name: Run ape test gas report
+
+on: [push, pull_request]
+
+jobs:
+  ape-gas:
+    runs-on: ubuntu-latest
+    name: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install eth-ape>=0.6.26
+      - run: ape plugins install foundry
+      - run: ape plugins install vyper
+      - run: ape test --gas
