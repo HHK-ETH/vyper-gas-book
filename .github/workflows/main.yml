@@ -15,5 +15,6 @@ jobs:
       - run: ape plugins install foundry
       - run: ape plugins install vyper
       - run: curl -L https://foundry.paradigm.xyz | bash
+      - run: source /home/runner/.bashrc
       - run: foundryup
       - run: ape test --network ethereum:local:foundry --gas
