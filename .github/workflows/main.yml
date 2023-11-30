@@ -14,4 +14,4 @@ jobs:
       - run: pip install eth-ape>=0.6.26
       - run: ape plugins install foundry
       - run: ape plugins install vyper
-      - run: ape test --gas
+      - run: ape test --network ethereum:local:foundry --gas
