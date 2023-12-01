@@ -6,7 +6,9 @@
 - `source venv/bin/activate`
 - `pip install -r requirements.txt`
 - `ape compile`
-- `ape test --network ethereum:local:foundry --gas`## Gas report 
+- `ape test --network ethereum:local:foundry --gas`
+
+## Gas report 
 
 ```
 ================================= Gas Profile ==================================
