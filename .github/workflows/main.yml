@@ -1,6 +1,10 @@
-name: Gas results
+name: Gas results readme
 
-on: [push, pull_request]
+on: 
+  push:
+    paths:
+      - contracts
+      - tests
 
 jobs:
   ape-gas:
