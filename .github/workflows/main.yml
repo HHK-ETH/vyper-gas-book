@@ -24,3 +24,4 @@ jobs:
         with:
           add: 'README.md'
           author_name: Gas results
+          message: 'GITHUB ACTION GAS PROFILER'
