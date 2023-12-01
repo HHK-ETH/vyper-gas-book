@@ -9,3 +9,10 @@
 .python-version
 __pycache__
 venv
+
+# Gas report
+hardhat-gas-report
+foundry-gas-report
+
+# Node
+node_modules
