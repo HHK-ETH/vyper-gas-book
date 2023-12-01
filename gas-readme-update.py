@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def extract_gas_report(path: str) -> str:
+def extract_gas_report(path: str, node: str) -> str:
     file = Path(path)
 
     if not file.exists():
@@ -13,8 +13,10 @@ def extract_gas_report(path: str) -> str:
 
     return (
         "```"
-        + contents[len(contents) - 1].replace("INFO: Stopping 'anvil' process.\n", "")
-        + "```"
+        + contents[len(contents) - 1].replace(
+            "\nINFO: Stopping '{node}' process.\n".format(node=node), ""
+        )
+        + "\n```"
     )  # Remove last line and put in code block
 
 
@@ -25,7 +27,7 @@ new_readme = "{old_readme}## Gas report \n\n### Hardhat\n{hardhat_gas_report}\n#
 Path("./README.md").write_text(
     new_readme.format(
         old_readme=old_readme.split("## Gas report")[0],
-        hardhat_gas_report=extract_gas_report("./hardhat-gas-report"),
-        foundry_gas_report=extract_gas_report("./foundry-gas-report"),
+        hardhat_gas_report=extract_gas_report("./hardhat-gas-report", "Hardhat node"),
+        foundry_gas_report=extract_gas_report("./foundry-gas-report", "anvil"),
     )
 )
