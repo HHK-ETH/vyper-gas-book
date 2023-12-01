@@ -16,7 +16,15 @@ jobs:
       - run: ape plugins install vyper
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
-      - run: ape test --network ethereum:local:foundry --gas > gas-report
+      - name: Foundry gas report
+        run: ape test --network ethereum:local:foundry --gas > foundry-gas-report
+      - name: Install npm and hardhat
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npm install hardhat
+      - name: Hardhat gas report
+        run: ape test --network ethereum:local:hardhat --gas > hardhat-gas-report
       - name: Update readme with gas results
         run: python gas-readme-update.py
       - name: Commit the new readme
