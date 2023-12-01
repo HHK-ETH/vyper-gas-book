@@ -16,4 +16,5 @@ jobs:
       - run: ape plugins install vyper
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
-      - run: ape test --network ethereum:local:foundry --gas
+      - run: ape test --network ethereum:local:foundry --gas > gas-report
+      - run: python gas-readme-update.py
