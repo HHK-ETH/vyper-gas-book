@@ -2,6 +2,8 @@ name: Gas results readme
 
 on: 
   push:
+    branches: 
+      - main
     paths:
       - contracts
       - tests
