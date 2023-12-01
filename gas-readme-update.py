@@ -1,19 +1,31 @@
 from pathlib import Path
 
-contents = Path("./gas-report").read_text()
 
-contents = contents.split(
-    "[100%]"
-)  # split using [100%] as it's last line before gas printing
+def extract_gas_report(path: str) -> str:
+    file = Path(path)
 
-gas_report = contents[len(contents) - 1].replace(
-    "INFO: Stopping 'anvil' process.\n", ""
-)  # Remove last line
+    if not file.exists():
+        return "Report not available."
 
-readme = Path("./README.md").read_text()
+    contents = file.read_text().split(
+        "[100%]"
+    )  # split using [100%] as it's last line before gas printing
 
-readme = (
-    readme.split("## Gas report")[0] + "## Gas report \n\n" + "```" + gas_report + "```"
+    return (
+        "```"
+        + contents[len(contents) - 1].replace("INFO: Stopping 'anvil' process.\n", "")
+        + "```"
+    )  # Remove last line and put in code block
+
+
+old_readme = Path("./README.md").read_text()
+
+new_readme = "{old_readme}## Gas report \n\n### Hardhat\n{hardhat_gas_report}\n### Foundry (Anvil)\n{foundry_gas_report}"
+
+Path("./README.md").write_text(
+    new_readme.format(
+        old_readme=old_readme.split("## Gas report")[0],
+        hardhat_gas_report=extract_gas_report("./hardhat-gas-report"),
+        foundry_gas_report=extract_gas_report("./foundry-gas-report"),
+    )
 )
-
-Path("./README.md").write_text(readme)
