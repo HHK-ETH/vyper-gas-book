@@ -5,9 +5,9 @@ on:
     branches: 
       - main
     paths:
-      - contracts
-      - tests
-      - .github/workflows
+      - contracts/**
+      - tests/**
+      - .github/workflows/**
 
 jobs:
   ape-gas:
