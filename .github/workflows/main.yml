@@ -17,4 +17,10 @@ jobs:
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
       - run: ape test --network ethereum:local:foundry --gas > gas-report
-      - run: python gas-readme-update.py
+      - name: Update readme with gas results
+        run: python gas-readme-update.py
+      - name: Commit the new readme
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'README.md'
+          author_name: GAS PROFILER
